@@ -75,7 +75,7 @@ userRouter.post("/logout",auth,async(req,res)=>{
 	}
 })
 
-userRouter.get("/",auth,access("admin"),async(req,res)=>{
+userRouter.get("/",auth,async(req,res)=>{
 	try{
 		const user = await UserModel.find();
 		res.status(200).json({user});
