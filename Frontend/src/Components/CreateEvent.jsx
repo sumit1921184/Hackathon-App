@@ -5,7 +5,7 @@ import { useModal } from "../ContextApi/Modal/ModalContext";
 import { useToast } from "@chakra-ui/react";
 
 const CreateEvent = () => {
-  const [createData, setCreateData] = useState(null);
+  const [createData, setCreateData] = useState({});
   const { showModal } = useModal();
   const toast = useToast();
   const {
@@ -14,7 +14,13 @@ const CreateEvent = () => {
     formState: { errors },
     reset,
   } = useForm();
-  const handleCreateEvent = async () => {
+  const handleCreateEvent = async (data) => {
+    // console.log("createData-----",createData);
+    const formattedData = {
+      ...data,
+      startDate: new Date(data.startDate).toISOString(),
+      endDate: new Date(data.endDate).toISOString(),
+    };
     try {
       let jwt = JSON.parse(localStorage.getItem("token"));
       const res = await fetch("https://petpals-4.onrender.com/createRouter/create", {
@@ -23,12 +29,12 @@ const CreateEvent = () => {
           'Authorization': `Bearer ${jwt}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(createData)
+        body: JSON.stringify(formattedData)
       });
-  
+
       const data = await res.json();
-      console.log("data-========",data)
-  
+      console.log("data-========", data)
+
       if (res.status === 201) {
         toast({
           title: "Contest created successfully",
@@ -55,21 +61,16 @@ const CreateEvent = () => {
       });
     }
   };
-  
+
+
 
   const onSubmit = (data) => {
     console.log("Form Submitted:", data);
-    setCreateData(data);
-
     showModal({
       body: <p>Do you want to create this Event?</p>,
-      onSave: handleCreateEvent,
-    })
-    // alert("Hackathon Details Submitted Successfully!");
-    
+      onSave: () => handleCreateEvent(data),
+    });
   };
-
-
 
   return (
 

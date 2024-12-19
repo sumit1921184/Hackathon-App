@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ModalContainer, { useModal } from '../ContextApi/Modal/ModalContext';
 import { useDisclosure } from '@chakra-ui/react';
 
@@ -13,6 +13,8 @@ const Navbar = () => {
 
     // Toggle mobile menu on hamburger click
     const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+    const location = useLocation();
+  const activeSection = location.pathname;
 
     // Toggle login state
     async function  handleLogout(){
@@ -74,13 +76,13 @@ const Navbar = () => {
   
           {/* Navbar Links */}
           <div className="hidden lg:flex lg:justify-center lg:items-center space-x-6">
-            <Link to="/" className="text-white hover:text-gray-300">
+            <Link to="/" className={`text-white hover:text-gray-300 font-extrabold ${activeSection === "/" ? "text-gray-400 " : ""}`}>
               Home
             </Link>
-            <Link to="/about" className="text-white hover:text-gray-300">
-              About
+            <Link to="/dashboard" className={`text-white hover:text-gray-300 font-extrabold ${activeSection === "/dashboard" ? "text-gray-400 " : ""}`}>
+              Dashboard
             </Link>
-            <Link to="/createEvent" className="text-white hover:text-gray-300">
+            <Link to="/createEvent" className={`text-white hover:text-gray-300 font-extrabold ${activeSection === "/createEvent" ? "text-gray-400 " : ""}`}>
               Create Event
             </Link>
   
@@ -117,13 +119,13 @@ const Navbar = () => {
         {/* Mobile Menu */}
         <div className={`lg:hidden ${isMobileMenuOpen ? "block" : "hidden"}`}>
           <div className="flex flex-col items-center">
-            <Link to="/" className="text-white py-2 hover:text-gray-300">
+            <Link to="/" className={`text-white hover:text-gray-300 font-extrabold ${activeSection === "/" ? "text-gray-400 " : ""}`}>
               Home
             </Link>
-            <Link to="/about" className="text-white py-2 hover:text-gray-300">
-              About
+            <Link to="/dashboard" className={`text-white hover:text-gray-300 font-extrabold ${activeSection === "/dashboard" ? "text-gray-400 " : ""}`}>
+              Dashboard
             </Link>
-            <Link to="/createEvent" className="text-white py-2 hover:text-gray-300">
+            <Link to="/createEvent" className={`text-white hover:text-gray-300 font-extrabold ${activeSection === "/createEvent" ? "text-gray-400 " : ""}`}>
             Create Event
             </Link>
   
