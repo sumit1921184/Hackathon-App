@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import createBg from "../assets/login.jpg"
 import { useModal } from "../ContextApi/Modal/ModalContext";
 import { useToast } from "@chakra-ui/react";
+import { url } from "../api";
 
 const CreateEvent = () => {
   const [createData, setCreateData] = useState({});
@@ -23,7 +24,7 @@ const CreateEvent = () => {
     };
     try {
       let jwt = JSON.parse(localStorage.getItem("token"));
-      const res = await fetch("https://petpals-4.onrender.com/createRouter/create", {
+      const res = await fetch(`${url}createRouter/create`, {
         method: "POST",
         headers: {
           'Authorization': `Bearer ${jwt}`,

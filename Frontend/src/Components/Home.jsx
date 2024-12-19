@@ -3,6 +3,7 @@ import home from "../assets/Home.webp";
 import Carousal from "./Carousal";
 import { Spinner } from "@chakra-ui/react"
 import { FaSpinner } from 'react-icons/fa';
+import { url } from "../api";
 
 const Home = () => {
   const [liveEvents, setLiveEvents] = useState([]);
@@ -15,9 +16,9 @@ const Home = () => {
       try {
         setLoader(true);
         // Fetch live events, upcoming events, and past events
-        const liveResponse = await fetch("https://petpals-4.onrender.com/createRouter/live");
-        const upcomingResponse = await fetch("https://petpals-4.onrender.com/createRouter/upcoming");
-        const pastResponse = await fetch("https://petpals-4.onrender.com/createRouter/past");
+        const liveResponse = await fetch(`${url}createRouter/live`);
+        const upcomingResponse = await fetch(`${url}createRouter/upcoming`);
+        const pastResponse = await fetch(`${url}createRouter/past`);
 
         const liveData = await liveResponse.json();
         const upcomingData = await upcomingResponse.json();

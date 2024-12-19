@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOGIN_FAILURE, LOGIN_SUCCESS, get_USER_SUCCESS } from '../Redux/actionTypes';
+import { url } from '../api';
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -19,7 +20,7 @@ export default function Login() {
   const onSubmit = async () => {
     try {
       const data = { email, pass };
-      let res = await fetch("https://petpals-4.onrender.com/users/login", {
+      let res = await fetch(`${url}users/login`, {
         method: "POST",
         headers: {
           "Content-type": "application/json"

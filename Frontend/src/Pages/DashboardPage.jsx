@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import home from "../assets/Home.webp";
+import { url } from '../api';
 
 function DashboardPage() {
+  const [userData, setUserData] = useState({});
+  useEffect (()=>{
+    async function  userDetails(){
+      try{
+        const res = await fetch(`${url}users/`);
+        const data = await res.json();
+        setUserData(data);
+        console.log(data);
+      }
+      catch(err){
+        console.log(err);
+      }
+    }
+    userDetails();
+  },[])
   return (
     <div
             className="relative flex items-center justify-center h-[50vh] bg-cover bg-center"

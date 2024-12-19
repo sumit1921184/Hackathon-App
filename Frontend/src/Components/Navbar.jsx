@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ModalContainer, { useModal } from '../ContextApi/Modal/ModalContext';
 import { useDisclosure } from '@chakra-ui/react';
+import { url } from '../api';
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -19,7 +20,7 @@ const Navbar = () => {
     // Toggle login state
     async function  handleLogout(){
         try{
-          let res = await fetch("https://petpals-4.onrender.com/users/logout");
+          let res = await fetch(`${url}users/logout`);
           let data=await res.json();
           console.log(data);
           localStorage.removeItem("token");

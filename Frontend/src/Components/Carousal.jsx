@@ -11,8 +11,8 @@ import { FaChevronCircleLeft, FaChevronCircleRight, FaChevronLeft, FaChevronRigh
 function Carousal({ cards, types }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   
-  // Dynamically adjust the cards per view
-  const cardsPerView = Math.min(cards.length, 2); // Show max 2 cards, adjust based on the available cards
+  
+  const cardsPerView = Math.min(cards.length, 2); 
   const cardsImagesLive = [h1, h2, h3, h4, h5, h6];
   const cardImagesPast = [h6,h5,h4,h3,h2,h1];
   const cardImagesUpcoming = [h4,h6,h1,h5,h3,h2]
@@ -23,21 +23,21 @@ function Carousal({ cards, types }) {
     );
   };
 
-  // Function to handle the previous slide
+  
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? cards.length - cardsPerView : prevIndex - 1
     );
   };
 
-  // Auto-slide functionality
+  
   useEffect(() => {
     const interval = setInterval(() => {
-      handleNext(); // Auto-slide to the next card
+      handleNext(); 
     }, 4000);
 
-    return () => clearInterval(interval); // Cleanup the interval on component unmount
-  }, [currentIndex, cardsPerView]); // Re-run the effect if currentIndex or cardsPerView changes
+    return () => clearInterval(interval); 
+  }, [currentIndex, cardsPerView]); 
 
   return (
     <VStack spacing={4} align="center" p={6}>

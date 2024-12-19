@@ -2,6 +2,7 @@ import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form'; // Import react-hook-form
+import { url } from '../api';
 // import login_picture from "../assets/pet3.jpg";
 
 
@@ -11,7 +12,7 @@ export default function Register() {
 
     // Initialize useForm hook
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
-    
+
     const onSubmit = async (data) => {
         // Check if password and confirmPassword match
         if (data.pass !== data.confirmPassword) {
@@ -24,7 +25,7 @@ export default function Register() {
         }
 
         try {
-            const res = await axios.post("https://petpals-4.onrender.com/users/register", data);
+            const res = await axios.post(`${url}users/register`, data);
             toast({
                 title: res.data.msg,
                 status: "success",
@@ -67,12 +68,12 @@ export default function Register() {
                                     className="border border-gray-300 p-4 mb-4 rounded focus:outline-none"
                                 />
                                 {errors.username && <p className="text-red-500">{errors.username.message}</p>}
-                                
+
                                 <input
                                     type="email"
                                     name="email"
                                     placeholder="Email"
-                                    {...register('email', { 
+                                    {...register('email', {
                                         required: 'Email is required',
                                         pattern: {
                                             value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
@@ -82,7 +83,7 @@ export default function Register() {
                                     className="border border-gray-300 p-4 mb-4 rounded focus:outline-none"
                                 />
                                 {errors.email && <p className="text-red-500">{errors.email.message}</p>}
-                                
+
                                 <input
                                     type="password"
                                     name="pass"
@@ -100,7 +101,7 @@ export default function Register() {
                                     className="border border-gray-300 p-4 mb-4 rounded focus:outline-none"
                                 />
                                 {errors.confirmPassword && <p className="text-red-500">{errors.confirmPassword.message}</p>}
-                                
+
                                 <input
                                     type="number"
                                     name="age"
