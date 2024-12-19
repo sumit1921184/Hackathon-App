@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from '../Components/Home'
 import Login from "../Components/Login";
-import Register from "../components/Register";
+import Register from "../Components/Register";
 import CreateEventPage from '../Pages/CreateEventPage';
 import PrivateRouting from './PrivateRouting';
 import DashboardPage from '../Pages/DashboardPage';
